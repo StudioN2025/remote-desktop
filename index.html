@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Remote Desktop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>P2P Remote Desktop</h1>
+        
+        <div class="role-selection">
+            <button onclick="setRole('host')" class="btn host-btn">Стать хостом</button>
+            <button onclick="setRole('client')" class="btn client-btn">Подключиться</button>
+        </div>
+
+        <div id="host-controls" style="display: none;">
+            <h2>Настройки хоста</h2>
+            <button onclick="startHost()" class="btn">Начать трансляцию</button>
+            <div class="info">
+                <p>Ваш ID: <span id="host-id"></span></p>
+                <button onclick="copyId()" class="btn-small">Копировать ID</button>
+            </div>
+        </div>
+
+        <div id="client-controls" style="display: none;">
+            <h2>Подключение к хосту</h2>
+            <input type="text" id="host-id-input" placeholder="Введите ID хоста">
+            <button onclick="connectToHost()" class="btn">Подключиться</button>
+        </div>
+
+        <div id="connection-status"></div>
+        
+        <div id="remote-screen" style="display: none;">
+            <video id="remote-video" autoplay playsinline></video>
+            <canvas id="remote-canvas" style="display: none;"></canvas>
+        </div>
+
+        <div id="controls-panel" style="display: none;">
+            <h3>Управление</h3>
+            <div class="mouse-controls">
+                <button onclick="sendMouseAction('click')">Клик</button>
+                <button onclick="sendMouseAction('right-click')">Правый клик</button>
+                <button onclick="sendMouseAction('double-click')">Двойной клик</button>
+            </div>
+            <div class="keyboard-controls">
+                <input type="text" id="keyboard-input" placeholder="Введите текст" onkeypress="sendKeyPress(event)">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
